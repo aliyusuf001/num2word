@@ -8,7 +8,7 @@ namespace easy_2
 {
     class Program
     {
-        static IDictionary<int, string> realnum = new Dictionary<int, string>()
+        static IDictionary<int, string> realNumber = new Dictionary<int, string>()
             {
                 {1, "One"},
                 {2, "Two"},
@@ -79,11 +79,12 @@ namespace easy_2
             {800, "Eight Hundred"},
             {900, "Nine Hundred"}
         };
-        static string spellnum(string getnum)
+
+        static string SpellNumber(string UserNumber)
         {
             try
             {
-                int thenum = Convert.ToInt32(getnum);
+                int theNumer = Convert.ToInt32(UserNumber);
 
                 IDictionary<int, string> unit = new Dictionary<int, string>()
             {
@@ -108,39 +109,39 @@ namespace easy_2
                 {19, "Nineteen"}
             };
 
-                string numlenght = Convert.ToString(thenum);
-                int lenght = numlenght.Length;
+                string numLenght = Convert.ToString(theNumer);
+                int lenght = numLenght.Length;
                 string result;
                 switch (lenght)
                 {
                     case 1:
-                        if (unit.TryGetValue(thenum, out result))
+                        if (unit.TryGetValue(theNumer, out result))
                         {
                             Console.WriteLine(result);
                         }
                         break;
                     case 2:
-                        if (unit.TryGetValue(thenum, out result))
+                        if (unit.TryGetValue(theNumer, out result))
                         {
                             Console.WriteLine(result);
                         }
                         else
                         {
-                            Gettens(getnum);
+                            GetTens(UserNumber);
                         }
                         break;
                     case 3:
-                        Gethund(getnum);
+                        GetHunded(UserNumber);
                         break;
                     case 4:
                     case 5:
                     case 6:
-                        Getthousand(getnum);
+                        GetThousand(UserNumber);
                         break;
                     case 7:
                     case 8:
                     case 9:
-                        Getmillion(getnum);
+                        GetMillion(UserNumber);
                         break;
                     default:
                         Console.WriteLine("Haa Haa Haa \n this is too mush!!!");
@@ -156,227 +157,231 @@ namespace easy_2
                 Console.WriteLine("Try to input corret number next time OK");
             }
             
-            return getnum; 
+            return UserNumber; 
         }
 
-        static string Getunit(string cnvtstring)
+
+        static string GetUnit(string UserNumber)
         {
-            int unitnum = Convert.ToInt32(cnvtstring);
-            string unitresult;
-            if(realnum.ContainsKey(unitnum) && realnum.TryGetValue(unitnum, out unitresult))
+            int unitsNumber = Convert.ToInt32(UserNumber);
+            string unitResult;
+            if(realNumber.ContainsKey(unitsNumber) && realNumber.TryGetValue(unitsNumber, out unitResult))
             {
-               Console.Write(unitresult);
+               Console.Write(unitResult);
             }
 
-            return cnvtstring;
+            return UserNumber;
         }
-
-        static string Gettens(string getnum)
+        static string GetTens(string UserNumber)
         {
-            int tensnum = Convert.ToInt32(getnum);
-            int thetensdiv = (tensnum / 10) * 10;
+            int tensNumber = Convert.ToInt32(UserNumber);
+            int theTensDivision = (tensNumber / 10) * 10;
 
-            int theunit = tensnum % 10;
-            string cnvtstring = Convert.ToString(theunit);
-            string unit = Convert.ToString(theunit); 
-            string tensresult;
-            string teensresult;
-            string realnumresult;
+            int theUnit = tensNumber % 10;
+            string getTheUnit = Convert.ToString(theUnit);
+            string tensResult;
+            string teensResult;
+            string realNumberResult;
 
-            if (realnum.ContainsKey(tensnum) && realnum.TryGetValue(tensnum, out realnumresult))
+            if (realNumber.ContainsKey(tensNumber) && realNumber.TryGetValue(tensNumber, out realNumberResult))
             {
-                Console.Write(realnumresult);
+                Console.Write(realNumberResult);
             }
 
-            if (tens.ContainsKey(tensnum) && tens.TryGetValue(tensnum, out tensresult))
+            if (tens.ContainsKey(tensNumber) && tens.TryGetValue(tensNumber, out tensResult))
             {
-                Console.Write(tensresult);
+                Console.Write(tensResult);
             }
-            else if (teens.TryGetValue(tensnum, out teensresult))
+            else if (teens.TryGetValue(tensNumber, out teensResult))
             {
-                Console.Write(teensresult);
+                Console.Write(teensResult);
             }
-            else if(tens.TryGetValue(thetensdiv, out tensresult))
+            else if(tens.TryGetValue(theTensDivision, out tensResult))
             {
-                    Console.Write(tensresult+" ");
-                    Getunit(cnvtstring);
+                Console.Write(tensResult + " ");
+                GetUnit(getTheUnit);
             }
 
-            return getnum;
+            return UserNumber;
         }
-        static string Gethund (string getnum)
+        static string GetHunded (string UserNumber)
         {
-            int hundrednum = Convert.ToInt32(getnum);
-            int hundreddiv = (hundrednum / 100) * 100;
-            int thetens = hundrednum - hundreddiv;
+            int hundredNumber = Convert.ToInt32(UserNumber);
+            int hundredDivision = (hundredNumber / 100) * 100;
+            int theTensNumber = hundredNumber - hundredDivision;
 
-            string cnvertteen = Convert.ToString(hundrednum);
-            string cnvtstring = Convert.ToString(thetens);
-            string hundredresult;
+            string theTeens = Convert.ToString(hundredNumber);
+            string theTens = Convert.ToString(theTensNumber);
+            string hundredResult;
 
-            if (hundred.TryGetValue(hundrednum, out hundredresult))
+            if (hundred.TryGetValue(hundredNumber, out hundredResult))
             {
-                Console.Write(hundredresult);
+                Console.Write(hundredResult);
             }
             else
             {
-                if (hundreddiv == 0 )
+                if (hundredDivision == 0 )
                 {
                     Console.Write("and ");
-                    Gettens(cnvertteen);
+                    GetTens(theTeens);
                 }
-                else if(hundred.TryGetValue(hundreddiv, out hundredresult))
+                else if(hundred.TryGetValue(hundredDivision, out hundredResult))
                 {
-                    Console.Write(hundredresult + " and ");
-                    Gettens(cnvtstring);
+                    Console.Write(hundredResult + " and ");
+                    GetTens(theTens);
                 }
             }
 
 
-            return getnum;
+            return UserNumber;
         }
-        static string Getthousand(string getnum)
+        static string GetThousand(string UserNumber)
         {
-            int thousandnum = Convert.ToInt32(getnum);
-            int thethousandnum = thousandnum % 1000;
-            int thousanddiv = thousandnum / 1000;
-            int thehundred = thethousandnum % 1000;
-            int milliondiv = thousanddiv * 1000;
+            int thousandNumber = Convert.ToInt32(UserNumber);
+            int realThousandNumber = thousandNumber % 1000;
+            int thousandDivivision = thousandNumber / 1000;
+            int theHundred = realThousandNumber % 1000;
+            int millionDivision = thousandDivivision * 1000;
 
-            string numberlength = Convert.ToString(thousandnum);
+            string numberLength = Convert.ToString(thousandNumber);
 
-            string tostring = Convert.ToString(thousanddiv);
-            string tostring2 = Convert.ToString(thehundred);
-            string cnvtstring = Convert.ToString(thethousandnum);
+            string firstDivision = Convert.ToString(thousandDivivision);
+            string lastDivision = Convert.ToString(realThousandNumber);
             string result;
-            string result2;
-            if (milliondiv == 0)
+            string secondResult;
+            if (millionDivision == 0)
             {
                 Console.Write(" ");
-                Gethund(getnum);
+                GetHunded(UserNumber);
             }
-            if (numberlength.Length == 4)
+            if (numberLength.Length == 4)
+
             {
-                if (unit.TryGetValue(thousanddiv, out result) && thehundred == 0)
+                if (unit.TryGetValue(thousandDivivision, out result) && theHundred == 0)
                 {
                     Console.Write(result + " Thousand. ");
                 }
-                else if (unit.TryGetValue(thousanddiv, out result))
+                else if (unit.TryGetValue(thousandDivivision, out result))
                 {
                     Console.Write(result + " Thousand, ");
-                    Gethund(cnvtstring);
+                    GetHunded(lastDivision);
                 }
             }
-            if (numberlength.Length == 5)
+            if (numberLength.Length == 5)
             {
-                if (tens.TryGetValue(thousanddiv, out result2) && thehundred == 0)
+                if (tens.TryGetValue(thousandDivivision, out secondResult) && theHundred == 0)
                 {
-                    Console.Write(result2 + "Thousand.");
+                    Console.Write(secondResult + "Thousand.");
                 }
-                else if (tens.TryGetValue(thousanddiv, out result))
+                else if (tens.TryGetValue(thousandDivivision, out result))
                 {
                     Console.Write(result + " Thousand, ");
-                    Gethund(cnvtstring);
+                    GetHunded(lastDivision);
                 }
-                else if (!tens.ContainsKey(thousanddiv) && thethousandnum == 0)
+                else if (!tens.ContainsKey(thousandDivivision) && realThousandNumber == 0)
                 {
-                    Gettens(tostring);
+                    GetTens(firstDivision);
                     Console.Write(" Thousand ");
                 }
-                else if (!tens.ContainsKey(thousanddiv))
+                else if (!tens.ContainsKey(thousandDivivision))
                 {
-                    Gettens(tostring);
+                    GetTens(firstDivision);
                     Console.Write(" Thousand, ");
-                    Gethund(cnvtstring);
+                    GetHunded(lastDivision);
                 }
                 
             }
-            if (numberlength.Length == 6)
+            if (numberLength.Length == 6)
             {
-                if (hundred.ContainsKey(thousanddiv) && thethousandnum == 0)
+                if (hundred.ContainsKey(thousandDivivision) && theHundred == 0)
                 {
-                    Gethund(tostring);
+                    GetHunded(firstDivision);
+                    Console.Write(" Thousand. ");
+                }
+                else if (!hundred.ContainsKey(thousandDivivision) && theHundred == 0)
+                {
+                    GetHunded(firstDivision);
                     Console.Write(" Thousand. ");
                 }
                 else
                 {
-                    Gethund(tostring);
-                    Console.Write(" Thousand, ");
-                    Gethund(cnvtstring);
+                    GetHunded(firstDivision);
+
+                    GetHunded(lastDivision);
                 }
                 
             }
             
-            return getnum;
+            return UserNumber;
         }
-        static string Getmillion(string getnum)
+        static string GetMillion(string UserNumber)
         {
-            int millionNum = Convert.ToInt32(getnum);
-            int milliondiv = millionNum / 1000000;
-            int millionrange = millionNum % 1000000;
+            int millionNumber = Convert.ToInt32(UserNumber);
+            int millionDivision = millionNumber / 1000000;
+            int millionRange = millionNumber % 1000000;
 
-            string numberlength = Convert.ToString(millionNum);
+            string numberLength = Convert.ToString(millionNumber);
 
-            string tostring = Convert.ToString(milliondiv);
-            string tostring2 = Convert.ToString(millionrange);
+            string firstDivision = Convert.ToString(millionDivision);
+            string lastDivision = Convert.ToString(millionRange);
 
-            if (numberlength.Length == 7)
+            if (numberLength.Length == 7)
             {
-                if (realnum.ContainsKey(milliondiv) && millionrange == 0)
+                if (realNumber.ContainsKey(millionDivision) && millionRange == 0)
                 {
-                    Gettens(tostring);
+                    GetTens(firstDivision);
                     Console.WriteLine( " Million. ");
                 }
                 else
                 {
-                    Gettens(tostring);
+                    GetTens(firstDivision);
                     Console.Write(" Million, ");
-                    Getthousand(tostring2);
+                    GetThousand(lastDivision);
                 }
             }
-            else if (numberlength.Length == 8)
+            else if (numberLength.Length == 8)
             {
-                if (tens.ContainsKey(milliondiv) && millionrange == 0)
+                if (tens.ContainsKey(millionDivision) && millionRange == 0)
                 {
-                    Gettens(tostring);
+                    GetTens(firstDivision);
                     Console.WriteLine(" Million. ");
                 }
-                else if (tens.ContainsKey(milliondiv))
+                else if (tens.ContainsKey(millionDivision))
                 {
-                    Gettens(tostring);
+                    GetTens(firstDivision);
                     Console.Write(" Million, ");
-                    Getthousand(tostring2);
+                    GetThousand(lastDivision);
                 }
-                else if (!tens.ContainsKey(milliondiv) && millionrange == 0)
+                else if (!tens.ContainsKey(millionDivision) && millionRange == 0)
                 {
-                    Gettens(tostring);
+                    GetTens(firstDivision);
                     Console.WriteLine(" Million. ");
                 }
-                else if (!tens.ContainsKey(milliondiv))
+                else if (!tens.ContainsKey(millionDivision))
                 {
-                    Gettens(tostring);
+                    GetTens(firstDivision);
                     Console.Write(" Million, ");
-                    Getthousand(tostring2);
+                    GetThousand(lastDivision);
                 }
 
             }
-            else if (numberlength.Length == 9)
+            else if (numberLength.Length == 9)
             {
-                if (hundred.ContainsKey(milliondiv) && millionrange == 0)
+                if (hundred.ContainsKey(millionDivision) && millionRange == 0)
                 {
-                    Gethund(tostring);
+                    GetHunded(firstDivision);
                     Console.Write(" Million. ");
                 }
                 else
                 {
-                    Gethund(tostring);
+                    GetHunded(firstDivision);
                     Console.Write(" Million, ");
-                    Getthousand(tostring2);
+                    GetThousand(lastDivision);
                 }
 
             }
 
-            return getnum;
+            return UserNumber;
         }
 
 
@@ -384,8 +389,8 @@ namespace easy_2
         {
 
             Console.Write("Enter the number you want to spell: ");
-            string getnum = Console.ReadLine();
-            spellnum(getnum);
+            string getUserNumber = Console.ReadLine();
+            SpellNumber(getUserNumber);
 
             Console.ReadLine();
 
